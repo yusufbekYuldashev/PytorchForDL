@@ -26,6 +26,7 @@ def test_step(model, dataloader, loss_fn, device):
     test_loss, test_acc = 0, 0
     with torch.inference_mode():
         for batch, (X, y) in enumerate(dataloader):
+            X, y = X.to(device), y.to(device)
             pred = model(X)
             loss = loss_fn(pred, y)
             test_loss += loss.item()
